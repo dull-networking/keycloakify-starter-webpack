@@ -1,3 +1,4 @@
+import "./main.css";
 import { Suspense, lazy } from "react";
 import type { ClassKey } from "keycloakify/login";
 import type { KcContext } from "./KcContext";
@@ -37,4 +38,12 @@ export default function KcPage(props: { kcContext: KcContext }) {
     );
 }
 
-const classes = {} satisfies { [key in ClassKey]?: string };
+const classes = {
+    kcHtmlClass: "html",
+    kcLocaleMainClass: "hide",
+    kcSignUpClass: "hide",
+    kcHeaderWrapperClass: "hideChildDiv logo",
+    kcFormCardClass: "card",
+    kcFormSettingClass: "hide",
+    kcButtonClass: "button"
+} satisfies { [key in ClassKey]?: string };

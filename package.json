@@ -1,6 +1,6 @@
 {
-    "name": "keycloakify-starter",
-    "version": "0.0.0",
+    "name": "dull-keycloak-theme",
+    "version": "1.0.0",
     "description": "Keycloakify 11 Webpack Starter",
     "repository": {
         "type": "git",
