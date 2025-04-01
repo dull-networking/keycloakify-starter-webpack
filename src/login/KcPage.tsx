@@ -1,10 +1,10 @@
-import "./main.css";
-import { Suspense, lazy } from "react";
 import type { ClassKey } from "keycloakify/login";
-import type { KcContext } from "./KcContext";
-import { useI18n } from "./i18n";
 import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "keycloakify/login/Template";
+import { Suspense, lazy } from "react";
+import type { KcContext } from "./KcContext";
+import { useI18n } from "./i18n";
+import "./main.css";
 const UserProfileFormFields = lazy(
     () => import("keycloakify/login/UserProfileFormFields")
 );
@@ -13,6 +13,13 @@ const doMakeUserConfirmPassword = true;
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
+    const overwrittenContext = {
+        ...kcContext,
+        url: {
+            ...kcContext.url,
+            loginResetCredentialsUrl: "/forgot-password"
+        }
+    } as KcContext;
 
     const { i18n } = useI18n({ kcContext });
 
@@ -23,7 +30,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     default:
                         return (
                             <DefaultPage
-                                kcContext={kcContext}
+                                kcContext={overwrittenContext}
                                 i18n={i18n}
                                 classes={classes}
                                 Template={Template}
@@ -44,6 +51,5 @@ const classes = {
     kcSignUpClass: "hide",
     kcHeaderWrapperClass: "hideChildDiv logo",
     kcFormCardClass: "card",
-    kcFormSettingClass: "hide",
     kcButtonClass: "button"
 } satisfies { [key in ClassKey]?: string };
